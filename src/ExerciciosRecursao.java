@@ -62,13 +62,13 @@ public class ExerciciosRecursao {
 		return convBase2("", n);
 	}
 	
-	public static int somatorioArray(ArrayList<Integer> a, int pos){
+	public static int somatorioArrayList(ArrayList<Integer> a, int pos){
 		if(pos+1>a.size())return 0;
-		return a.get(pos)+somatorioArray(a,pos+1);
+		return a.get(pos)+somatorioArrayList(a,pos+1);
 	}
 	
-	public static int somatorioArray(ArrayList<Integer> a){
-		return somatorioArray(a,0);
+	public static int somatorioArrayList(ArrayList<Integer> a){
+		return somatorioArrayList(a,0);
 	}
 	
 	public static int findBiggest(ArrayList<Integer> ar, int n, int pos){
@@ -96,7 +96,7 @@ public class ExerciciosRecursao {
 		a.add(3);
 		a.add(4);
 		a.add(5);
-		System.out.println("Somatorio dos números do ArrayList é = " + somatorioArray(a));
+		System.out.println("Somatorio dos números do ArrayList é = " + somatorioArrayList(a));
 		ArrayList<Integer> ar = new ArrayList<Integer>();
 		ar.add(1);
 		ar.add(3);
