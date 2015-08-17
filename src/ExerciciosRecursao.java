@@ -1,7 +1,7 @@
 import java.util.ArrayList;
 
 
-public class ExerciciosFatorial {
+public class ExerciciosRecursao {
 	public static int fatorial(int n){
 		if(n<0)return -1;
 		if(n==0)return 1;
@@ -62,12 +62,12 @@ public class ExerciciosFatorial {
 		return convBase2("", n);
 	}
 	
-	public static int somatorioArray(int a [], int pos){
-		if(pos+1>a.length)return 0;
-		return a[pos]+somatorioArray(a,pos+1);
+	public static int somatorioArray(ArrayList<Integer> a, int pos){
+		if(pos+1>a.size())return 0;
+		return a.get(pos)+somatorioArray(a,pos+1);
 	}
 	
-	public static int somatorioArray(int a []){
+	public static int somatorioArray(ArrayList<Integer> a){
 		return somatorioArray(a,0);
 	}
 	
@@ -78,7 +78,7 @@ public class ExerciciosFatorial {
 	}
 	
 	public static int findBiggest(ArrayList<Integer> ar){
-		if(ar==null)throw new NullPointerException("O ArrayListe está null!");
+		if(ar==null)throw new NullPointerException("O ArrayList está null!");
 		return findBiggest(ar, ar.get(0), 0);
 	}
 	
@@ -90,8 +90,13 @@ public class ExerciciosFatorial {
 		System.out.println("É palindromo ANA = " + isPal("ANA"));
 		System.out.println("É palindromo ANAB = " + isPal("ANAB"));
 		System.out.println("4 na base binaria é = " + convBase2(4));
-		int a [] = {1,2,3,4,5};
-		System.out.println("Somatorio dos números do array é = " + somatorioArray(a));
+		ArrayList<Integer> a = new ArrayList<Integer>();
+		a.add(1);
+		a.add(2);
+		a.add(3);
+		a.add(4);
+		a.add(5);
+		System.out.println("Somatorio dos números do ArrayList é = " + somatorioArray(a));
 		ArrayList<Integer> ar = new ArrayList<Integer>();
 		ar.add(1);
 		ar.add(3);
