@@ -113,10 +113,9 @@ public class ExerciciosRecursao {
 		return (n==0 ? 1 : 0);
 	}
 	
-	// A função abaixo recebe uma cadeia de caracteres str 
+	// A função abaixo recebe uma string str
 	// e imprime todas permutações de str que começam com 
-	// os i primeiros caracteres de str. No fim da execução 
-	// da função, a cadeia str é idêntica à original.
+	// os i primeiros caracteres de str.
 	public static void permutacao(ArrayList<String>palavras, String str, int i){
 		int j, comprimento;
 		comprimento = str.length();
@@ -222,7 +221,7 @@ public class ExerciciosRecursao {
 		System.out.println();
 		System.out.println("substrings da palavra EDUARDO = "+substringGenerator("EDUARDO"));
 		System.out.println();
-		System.out.println("ndigitos em -1 = "+nroDigit(00));
+		System.out.println("ndigitos em -1 = "+nroDigit(0));
 	}
 	
 	public static BigDecimal fibonacci2(int p){
