@@ -1,28 +1,29 @@
+import java.math.BigDecimal;
+import java.math.BigInteger;
 import java.util.ArrayList;
+
+import javax.management.RuntimeOperationsException;
 
 
 public class ExerciciosRecursao {
-	public static int fatorial(int n){
-		if(n<0)return -1;
-		if(n==0)return 1;
-		if(n==1)return 1;
-		return n*fatorial(n-1);
+	public static BigDecimal fatorial(int n){
+		if(n<0)throw new RuntimeOperationsException(null,"Numero negativo!");
+		if(n==0)return new BigDecimal("1");
+		return new BigDecimal(""+n).multiply(fatorial(n-1));
 	}
 	
-	public static int somatorio(int n){
+	public static long somatorio(int n){
 		if(n==0)return 0;
 		if(n<0)return n+somatorio(n+1);
 		return n+somatorio(n-1);
 	}
 	
-	public static int fibonacci(int n){
-		if(n<=0)return -1;
-		if(n==1)return 1;
-		if(n==2)return 1;
-		else return fibonacci(n-1)+fibonacci(n-2);
+	public static BigDecimal fibonacci(int n){
+		if(n<1)throw new RuntimeOperationsException(null,"Numero menor que 1!");
+		return (n<=2 ? new BigDecimal("1") : new BigDecimal("0").add(fibonacci(n-1)).add(fibonacci(n-2)));
 	}
 	
-	public static int somatorioKJ(int k, int j) {
+	public static long somatorioKJ(int k, int j) {
 		int maior, menor;
 		if(k>=j){
 			maior = k;
@@ -63,6 +64,17 @@ public class ExerciciosRecursao {
 		return convBase2("", n);
 	}
 	
+	public static String convBase(String numero,int n,int b){
+		if(n/b==0)return n+numero;
+		int res = n/b;
+		numero = n%b+numero;
+		return convBase(numero, res,b);
+	}
+	
+	public static String convBase(int n, int b){
+		return convBase("", n, b);
+	}
+	
 	public static int somatorioArrayList(ArrayList<Integer> a, int pos){
 		if(pos+1>a.size())return 0;
 		return a.get(pos)+somatorioArrayList(a,pos+1);
@@ -90,20 +102,20 @@ public class ExerciciosRecursao {
 		return findSubStr(a.substring(1,a.length()), b);
 	}
 	
-	public static int nroDigit(int n){
+	public static int nroDigit(int numero){
+		
+		int n = numero;
+		if(n<0)n=n*-1;
+		if(n!=0 && n/10==0)return 1;
 		if(n>=1){
 			return 1+nroDigit(n/10);
 		}
-		return 0;
+		return (n==0 ? 1 : 0);
 	}
 	
-	public static ArrayList<String> permutations(String s){
-		
-		return null;
-	}
 	// A função abaixo recebe uma cadeia de caracteres str 
 	// e imprime todas permutações de str que começam com 
-	// os k primeiros caracteres de str. No fim da execução 
+	// os i primeiros caracteres de str. No fim da execução 
 	// da função, a cadeia str é idêntica à original.
 	public static void permutacao(ArrayList<String>palavras, String str, int i){
 		int j, comprimento;
@@ -129,13 +141,50 @@ public class ExerciciosRecursao {
 		permutacao(palavras, str, 0);
 		return palavras;
 	}
-		
+	
+	public static String espelhaPalavra(String palavra, int i, int j){
+		if(i==j || j-1==1)return palavra;
+		String palavraAUX = palavra;
+		char tmp;
+		tmp = palavraAUX.charAt(i);
+		StringBuffer sb = new StringBuffer(palavraAUX);
+		sb.setCharAt(i, palavraAUX.charAt(j));
+		sb.setCharAt(j, tmp);
+		palavraAUX = sb.toString();
+		return espelhaPalavra(palavraAUX, i+1, j-1);
+	}
+	
+	public static String espelhaPalavra(String palavra){
+		return espelhaPalavra(palavra, 0, palavra.length()-1);
+	}
+	
+	public static String espelha(String palavra) {
+	    if ((palavra == null) || (palavra.length() <= 1)) {
+	        return palavra;
+	    }
+	    return espelha(palavra.substring(1)) + palavra.charAt(0);
+	}
+	
+	public static ArrayList<String> substringGenerator(String palavra) {
+		if(palavra.length()==0 || palavra==null)throw new NullPointerException();
+		ArrayList<String> lista = new ArrayList<String>();
+		if(palavra.length()==1){
+			lista.add(palavra);
+			return lista;
+		}
+		for (int i = 1; i <= palavra.length(); i++) {
+			lista.add(palavra.substring(0,i));
+		}
+		lista.addAll(substringGenerator(palavra.substring(1,palavra.length())));
+		return lista;
+	}
+	
 	public static void main(String[] args) {
-		System.out.println("Fatorial de 3 = " + fatorial(3));
+		System.out.println("Fatorial de 1000 = " + fatorial(1000));
 		System.out.println();
-		System.out.println("Somatorio de 5 = " + somatorio(5));
+		System.out.println("Somatorio de 10000 = " + somatorio(10000));
 		System.out.println();
-		System.out.println("Fibonacci de 5 = " + fibonacci(5));
+		System.out.println("Fibonacci de 10 = " + fibonacci(10));
 		System.out.println();
 		System.out.println("Somatorio entre 3 e 7 = " + somatorioKJ(1,7));
 		System.out.println();
@@ -166,5 +215,26 @@ public class ExerciciosRecursao {
 		System.out.println("Quantidade de digitos no numero 100: "+nroDigit(100));
 		System.out.println();
 		System.out.println("Permutações da palavra cão: "+permutacao("cão"));
+		System.out.println();
+		System.out.println("Hello! espelhado é igual a "+espelhaPalavra("Hello!"));
+		System.out.println();
+		System.out.println("Hello! espelhado é igual a "+espelha("Hello!"));
+		System.out.println();
+		System.out.println("substrings da palavra EDUARDO = "+substringGenerator("EDUARDO"));
+		System.out.println();
+		System.out.println("ndigitos em -1 = "+nroDigit(00));
+	}
+	
+	public static BigDecimal fibonacci2(int p){
+		int pos = p-1;
+		BigDecimal aux1 = new BigDecimal("1");
+		BigDecimal aux2 =new BigDecimal("1");
+		if(pos==1 || pos==2)return new BigDecimal("1");
+		for (int i = 2; i <=pos; i++) {
+			BigDecimal aux3 = new BigDecimal(""+aux1).add(aux2);
+			aux1 = aux2;
+			aux2 = aux3;
+		}
+		return aux2;
 	}
 }
