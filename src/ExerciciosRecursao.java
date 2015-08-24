@@ -178,50 +178,51 @@ public class ExerciciosRecursao {
 		return lista;
 	}
 	
+	public static boolean find(String a, String b, int pos){
+		if(a==null || b==null)return false;
+		if(a.length()<b.length())return false;
+		if(pos==(a.length()-b.length()))return false;
+		int index = 0;
+		for(int i = pos;i<pos+b.length();i++){
+			if(a.charAt(i)==b.charAt(index)){
+				if(index==b.length()-1){
+					return true;
+				}
+				index++;
+			}
+		}
+		return find(a, b, pos+1);	
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Fatorial de 1000 = " + fatorial(1000));
-		System.out.println();
-		System.out.println("Somatorio de 10000 = " + somatorio(10000));
-		System.out.println();
-		System.out.println("Fibonacci de 10 = " + fibonacci(10));
-		System.out.println();
-		System.out.println("Somatorio entre 3 e 7 = " + somatorioKJ(1,7));
-		System.out.println();
-		System.out.println("É palindromo ANA = " + isPal("ANA"));
-		System.out.println();
-		System.out.println("É palindromo ANAB = " + isPal("ANAB"));
-		System.out.println();
-		System.out.println("4 na base binaria é = " + convBase2(4));
+		System.out.println("\nSomatorio de 10000 = " + somatorio(10000));
+		System.out.println("\nFibonacci de 10 = " + fibonacci(10));
+		System.out.println("\nSomatorio entre 3 e 7 = " + somatorioKJ(1,7));
+		System.out.println("\nÉ palindromo ANA = " + isPal("ANA"));
+		System.out.println("\nÉ palindromo ANAB = " + isPal("ANAB"));
+		System.out.println("\n4 na base binaria é = " + convBase2(4));
 		ArrayList<Integer> a = new ArrayList<Integer>();
-		System.out.println();
 		a.add(1);
 		a.add(2);
 		a.add(3);
 		a.add(4);
 		a.add(5);
-		System.out.println("Somatorio dos números do ArrayList é = " + somatorioArrayList(a));
+		System.out.println("\nSomatorio dos números do ArrayList é = " + somatorioArrayList(a));
 		ArrayList<Integer> ar = new ArrayList<Integer>();
 		ar.add(1);
 		ar.add(3);
 		ar.add(7);
 		ar.add(5);
 		ar.add(4);
-		System.out.println();
-		System.out.println("O maior numero no ArrayList é: " + findBiggest(ar));
-		System.out.println();
-		System.out.println("aa é subpalavra de baab? "+findSubStr("baab", "aa"));
-		System.out.println();
-		System.out.println("Quantidade de digitos no numero 100: "+nroDigit(100));
-		System.out.println();
-		System.out.println("Permutações da palavra cão: "+permutacao("cão"));
-		System.out.println();
-		System.out.println("Hello! espelhado é igual a "+espelhaPalavra("Hello!"));
-		System.out.println();
+		System.out.println("\nO maior numero no ArrayList é: " + findBiggest(ar));
+		System.out.println("\naa é subpalavra de baab? "+findSubStr("baab", "aa"));
+		System.out.println("\nQuantidade de digitos no numero 100: "+nroDigit(100));
+		System.out.println("\nPermutações da palavra cão: "+permutacao("cão"));
+		System.out.println("\nHello! espelhado é igual a "+espelhaPalavra("Hello!"));
 		System.out.println("Hello! espelhado é igual a "+espelha("Hello!"));
-		System.out.println();
-		System.out.println("substrings da palavra EDUARDO = "+substringGenerator("EDUARDO"));
-		System.out.println();
-		System.out.println("ndigitos em -1 = "+nroDigit(0));
+		System.out.println("\nsubstrings da palavra EDUARDO = "+substringGenerator("EDUARDO"));
+		System.out.println("\nFind sip em Mississipp: "+find("Mississipp", "sip", 0));
 	}
 	
 	public static BigDecimal fibonacci2(int p){
