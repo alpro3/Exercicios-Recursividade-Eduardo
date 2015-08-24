@@ -140,14 +140,13 @@ public class ExerciciosRecursao {
 		permutacao(palavras, str, 0);
 		return palavras;
 	}
-	
+
 	public static String espelhaPalavra(String palavra, int i, int j){
-		if(i==j || j-1==1)return palavra;
-		String palavraAUX = palavra;
-		char tmp;
-		tmp = palavraAUX.charAt(i);
-		StringBuffer sb = new StringBuffer(palavraAUX);
-		sb.setCharAt(i, palavraAUX.charAt(j));
+		if(i==j || j<i)return palavra;
+		String palavraAUX;
+		char tmp = palavra.charAt(i);
+		StringBuffer sb = new StringBuffer(palavra);
+		sb.setCharAt(i, palavra.charAt(j));
 		sb.setCharAt(j, tmp);
 		palavraAUX = sb.toString();
 		return espelhaPalavra(palavraAUX, i+1, j-1);
@@ -194,6 +193,26 @@ public class ExerciciosRecursao {
 		return find(a, b, pos+1);	
 	}
 	
+	public static String reverteSubstring(String a, String b, int pos){
+		if(a==null || b==null)return null;
+		if(a.length()<b.length())return null;
+		if(pos==(a.length()-b.length()))return a;
+		int index = 0;
+		for(int i = pos;i<pos+b.length();i++){
+			if(a.charAt(i)==b.charAt(index)){
+				if(index==b.length()-1){
+					String aux1 = a.substring(0,pos);
+					String aux2 = espelhaPalavra(a.substring(pos,pos+b.length()));
+					String aux3 = a.substring(pos+b.length(),a.length());
+					aux1+=aux2+aux3;
+					return aux1;
+				}
+				index++;
+			}
+		}
+		return reverteSubstring(a, b, pos+1);	
+	}
+	
 	public static void main(String[] args) {
 		System.out.println("Fatorial de 1000 = " + fatorial(1000));
 		System.out.println("\nSomatorio de 10000 = " + somatorio(10000));
@@ -219,10 +238,13 @@ public class ExerciciosRecursao {
 		System.out.println("\naa é subpalavra de baab? "+findSubStr("baab", "aa"));
 		System.out.println("\nQuantidade de digitos no numero 100: "+nroDigit(100));
 		System.out.println("\nPermutações da palavra cão: "+permutacao("cão"));
+		
+		
 		System.out.println("\nHello! espelhado é igual a "+espelhaPalavra("Hello!"));
 		System.out.println("Hello! espelhado é igual a "+espelha("Hello!"));
 		System.out.println("\nsubstrings da palavra EDUARDO = "+substringGenerator("EDUARDO"));
 		System.out.println("\nFind sip em Mississipp: "+find("Mississipp", "sip", 0));
+		System.out.println("\nEduardo invertendo ua : "+reverteSubstring("EDUARDO", "UA", 0));
 	}
 	
 	public static BigDecimal fibonacci2(int p){
