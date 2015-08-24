@@ -95,11 +95,11 @@ public class ExerciciosRecursao {
 		return findBiggest(ar, ar.get(0), 0);
 	}
 	
-	public static boolean findSubStr(String a, String b){
-		if(a.length()<b.length())return false;
-		String aux = a.substring(0,b.length());
-		if(aux.equals(b))return true;
-		return findSubStr(a.substring(1,a.length()), b);
+	public static boolean findSubStr(String str, String match){
+		if(match.length()<str.length() || str==null || match==null)return false;
+		String aux = match.substring(0,str.length());
+		if(aux.equals(str))return true;
+		return findSubStr(str, match.substring(1,match.length()));
 	}
 	
 	public static int nroDigit(int numero){
@@ -235,7 +235,7 @@ public class ExerciciosRecursao {
 		ar.add(5);
 		ar.add(4);
 		System.out.println("\nO maior numero no ArrayList é: " + findBiggest(ar));
-		System.out.println("\naa é subpalavra de baab? "+findSubStr("baab", "aa"));
+		System.out.println("\naa é subpalavra de baab? "+findSubStr("aa", "baab"));
 		System.out.println("\nQuantidade de digitos no numero 100: "+nroDigit(100));
 		System.out.println("\nPermutações da palavra cão: "+permutacao("cão"));
 		
